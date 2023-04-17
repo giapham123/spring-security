@@ -1,14 +1,15 @@
 package com.example.demoSecurity;
 
 import com.example.demoSecurity.Security.*;
+import com.example.demoSecurity.Shared.ResponseObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -26,9 +27,20 @@ class LoginController {
     JwtTokenService jwtTokenService;
 
     @GetMapping("/login/aaa")
-    public ResponseEntity<String> login() {
-        return  new ResponseEntity<>("Your age is GP",
-                HttpStatus.OK);
+    public ResponseEntity<?> login() {
+        ResponseObject bizResponse = new ResponseObject();
+        Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        bizResponse.setData(((UserDetails)principal).getUsername());
+        return ResponseEntity.ok(bizResponse);
+    }
+
+
+    @GetMapping("/login1/aaa")
+    public ResponseEntity<?> login1() {
+        ResponseObject bizResponse = new ResponseObject();
+        Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        bizResponse.setData(((UserDetails)principal).getUsername());
+        return ResponseEntity.ok(bizResponse);
     }
 
     @Autowired

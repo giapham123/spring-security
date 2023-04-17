@@ -16,6 +16,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 @Component
@@ -44,13 +45,16 @@ public class JwtRequestFilter extends OncePerRequestFilter {
             chain.doFilter(request, response);
             return;
         }
-
         // set user details on spring security context
-
-
         List<GrantedAuthority> listAuthorities = new ArrayList<GrantedAuthority>();
         listAuthorities.add(new SimpleGrantedAuthority("ROLE_USER"));
-        final JwtUserDetails userDetails = new JwtUserDetails(1, "giapham","$2a$12$LWqqZDHGA4okGGyYjsQq8O7OtimL7KPaWqYDoxDQzm3YbuQn9Otcm",listAuthorities);
+        final JwtUserDetails userDetails ;
+        if(username.equals("giapham")){
+            userDetails = new JwtUserDetails(1,"JN", "giapham","$2a$12$LWqqZDHGA4okGGyYjsQq8O7OtimL7KPaWqYDoxDQzm3YbuQn9Otcm", Collections.singletonList(new SimpleGrantedAuthority("ROLE_USER")));
+        }else{
+            userDetails = new JwtUserDetails(2, "SE","giapham1","$2a$12$LWqqZDHGA4okGGyYjsQq8O7OtimL7KPaWqYDoxDQzm3YbuQn9Otcm", Collections.singletonList(new SimpleGrantedAuthority("ROLE_ADMIN")));
+        }
+        //Store the details of who is authenticated with "UsernamePasswordAuthenticationToken"
         final UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(
                 userDetails, null, userDetails.getAuthorities());
         authentication.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));

@@ -32,7 +32,9 @@ public class WebSecurityConfig {
                 .csrf().disable()
                 .authorizeHttpRequests()
                 .antMatchers("/authenticate").permitAll()
-                .anyRequest().hasRole("USER").and()
+//                .anyRequest().hasRole("USER").and()
+                .antMatchers("/login/**").hasRole("USER")
+                .antMatchers("/login1/**").hasRole("ADMIN").and()
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and()
                 .addFilterBefore(jwtRequestFilter, UsernamePasswordAuthenticationFilter.class)
                 .build();
