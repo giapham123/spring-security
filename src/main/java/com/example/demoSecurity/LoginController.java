@@ -26,23 +26,6 @@ class LoginController {
     @Autowired
     JwtTokenService jwtTokenService;
 
-    @GetMapping("/login/aaa")
-    public ResponseEntity<?> login() {
-        ResponseObject bizResponse = new ResponseObject();
-        Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        bizResponse.setData(((UserDetails)principal).getUsername());
-        return ResponseEntity.ok(bizResponse);
-    }
-
-
-    @GetMapping("/login1/aaa")
-    public ResponseEntity<?> login1() {
-        ResponseObject bizResponse = new ResponseObject();
-        Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        bizResponse.setData(((UserDetails)principal).getUsername());
-        return ResponseEntity.ok(bizResponse);
-    }
-
     @Autowired
     AuthenticationManager authenticationManager;
 

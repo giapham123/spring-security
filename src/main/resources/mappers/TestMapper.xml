@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.demoSecurity.apiTest.mappers.TestApiMapper">
+   <select id="getData"  resultType="com.example.demoSecurity.apiTest.model.TestApiModel">
+       SELECT id id,
+       subscriber_id subscriberId,
+       segment_id segmentId,
+       status status,
+       created_at createdAt,
+       updated_at updateAt
+       FROM wp_mailpoet_subscriber_segment
+       WHERE 1=1
+       LIMIT 1
+   </select>
+</mapper>
