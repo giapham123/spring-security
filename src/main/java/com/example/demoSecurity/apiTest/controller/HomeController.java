@@ -1,0 +1,28 @@
+package com.example.demoSecurity.apiTest.controller;
+
+import com.example.demoSecurity.Shared.ResponseObject;
+import com.example.demoSecurity.apiTest.services.IHomeProductService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+@RestController
+@RequestMapping("/view/")
+public class HomeController {
+
+    @Autowired
+    IHomeProductService iHomeProductService;
+
+    @GetMapping("get-all-category")
+    public ResponseObject getCategory(){
+        return iHomeProductService.getAllCategory();
+    }
+
+    @GetMapping("newest-product")
+    public ResponseObject getNewestProduct(){
+        return iHomeProductService.getNewestProduct();
+    }
+
+}

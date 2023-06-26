@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.demoSecurity.apiTest.mappers.HomeProductMapper">
+    <select id="getNewestProduct"  resultType="ProductModel">
+        SELECT product_id productId,
+        name name,
+        price price,
+        "desc" desc,
+        addr addr,
+        details details,
+        cate_cd cateCd,
+        cre_dt creDt,
+        updt_dt updDt,
+        user_id userId,
+        'http://localhost:8091/product-photos/' || image image
+        FROM public.products
+        ORDER BY cre_dt DESC
+        LIMIT 10
+    </select>
+
+    <select id="getAllCategory"  resultType="CateModel">
+        SELECT
+        cate_name cateNm,
+        cate_url url,
+        cate_cd cateCd
+        FROM public.categories
+    </select>
+</mapper>

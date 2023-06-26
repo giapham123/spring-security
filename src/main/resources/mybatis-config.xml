@@ -6,5 +6,8 @@
     <settings>
         <setting name="callSettersOnNulls" value="true"/>
     </settings>
+    <typeAliases>
+        <package name="com.example.demoSecurity.apiTest.model"/>
+    </typeAliases>
     <mappers/>
 </configuration>

@@ -1,5 +1,4 @@
 package com.example.demoSecurity.Shared;
-
 import java.io.Serializable;
 
 public class ResponseObject<T> implements Serializable {
@@ -78,4 +77,3 @@ public class ResponseObject<T> implements Serializable {
         return new ResponseObject(false, message);
     }
 }
-

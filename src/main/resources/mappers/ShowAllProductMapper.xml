@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.demoSecurity.apiTest.mappers.ShowAllProductMapper">
+   <select id="getAllProductViaCategory"  resultType="ProductModel">
+       SELECT product_id productId,
+       name name,
+       price price,
+       "desc" desc,
+       addr addr,
+       details details,
+       cate_cd cateCd,
+       cre_dt creDt,
+       updt_dt updDt,
+       user_id userId,
+       'http://localhost:8091/product-photos/' || image image
+       FROM public.products
+       WHERE cate_cd = #{cateCd}
+       ORDER BY cre_dt DESC
+       OFFSET #{page} ROWS
+       FETCH FIRST 10 ROW ONLY
+   </select>
+
+    <select id="getAllProductViaUser"  resultType="ProductModel">
+        SELECT product_id productId,
+        name name,
+        price price,
+        "desc" desc,
+        addr addr,
+        details details,
+        cate_cd cateCd,
+        cre_dt creDt,
+        updt_dt updDt,
+        user_id userId,
+        'http://localhost:8091/product-photos/' || image image
+        FROM public.products
+        WHERE 1=1
+        ORDER BY cre_dt DESC
+        OFFSET 20 ROWS
+        FETCH FIRST 20 ROW ONLY
+    </select>
+
+    <select id="getDetailUser"  resultType="ShopModel">
+        SELECT shop_id userId,
+        image img,
+        "desc" desc,
+        shop_nm shopNm
+        FROM public."usersShop"
+    </select>
+</mapper>
