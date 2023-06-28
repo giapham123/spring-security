@@ -55,6 +55,7 @@ public class ProductService implements IProductService {
                 String randomID = UUID.randomUUID().toString();
                 String fileName = randomID.concat(name.substring(name.lastIndexOf(".")));
                 if(count == 0){
+                    count++;
                     productModel.setImage(fileName);
                     productMapper.insertProduct(productModel);
                     id = productModel.getProductId();
@@ -64,7 +65,7 @@ public class ProductService implements IProductService {
 
                 //Save image to folder source
                 String uploadDir = "./product-photos/";
-                byte[] bytes = file_bk.getBytes();
+                byte[] bytes = file.getBytes();
                 Path path = Paths.get(uploadDir + fileName);
                 Files.write(path, bytes);
                 imagesString.add(fileName);

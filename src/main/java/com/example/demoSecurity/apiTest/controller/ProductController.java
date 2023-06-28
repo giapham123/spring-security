@@ -4,6 +4,7 @@ import com.example.demoSecurity.Config.ResourceConfigurations;
 import com.example.demoSecurity.Shared.ResponseObject;
 import com.example.demoSecurity.apiTest.model.ProductModel;
 import com.example.demoSecurity.apiTest.services.IProductService;
+import com.google.gson.Gson;
 import org.apache.commons.io.FileUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
@@ -18,6 +19,7 @@ import javax.servlet.http.HttpServletRequest;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Path;
+import java.util.List;
 
 
 @RestController
@@ -29,11 +31,12 @@ public class ProductController {
     IProductService iProductService;
 
     @PostMapping("insert-product")
-    public ResponseObject insertProduct(@RequestPart("images") MultipartFile[] images,
-                                        @RequestPart("data") ProductModel data){
+    public ResponseObject insertProduct(@RequestParam("data") String data, @RequestParam("images") MultipartFile[] images){
         ResponseObject rs = new ResponseObject();
         try{
-             rs = iProductService.insertProduct(images,data);
+            Gson g = new Gson();
+            ProductModel s = g.fromJson(data, ProductModel.class);
+            rs = iProductService.insertProduct(images,s);
         }catch (Exception e){
             System.out.println(e);
         }
