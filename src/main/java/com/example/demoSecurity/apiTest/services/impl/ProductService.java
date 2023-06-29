@@ -50,7 +50,6 @@ public class ProductService implements IProductService {
                 if (file.isEmpty()) {
                     continue; //next pls
                 }
-                MultipartFile file_bk = file;
                 String name = file.getOriginalFilename();
                 String randomID = UUID.randomUUID().toString();
                 String fileName = randomID.concat(name.substring(name.lastIndexOf(".")));
