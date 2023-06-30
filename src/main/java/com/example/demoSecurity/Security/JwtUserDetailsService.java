@@ -23,7 +23,7 @@ public class JwtUserDetailsService  implements UserDetailsService {
 //        lsUser.add(new UserModel(1,"giapham", "$2a$12$LWqqZDHGA4okGGyYjsQq8O7OtimL7KPaWqYDoxDQzm3YbuQn9Otcm"));
 //        lsUser.add(new UserModel(2,"giapham1", "$2a$12$LWqqZDHGA4okGGyYjsQq8O7OtimL7KPaWqYDoxDQzm3YbuQn9Otcm"));
         if(username.equals("giapham")){
-            return new JwtUserDetails(1,"JN", "giapham","$2a$12$LWqqZDHGA4okGGyYjsQq8O7OtimL7KPaWqYDoxDQzm3YbuQn9Otcm", Collections.singletonList(new SimpleGrantedAuthority(ROLE_USER)));
+            return new JwtUserDetails(1,"JN", "giapham","$2a$12$pUb7IttKsTF0NcJfeEm6Ke5yXQyKeC5LrGQ.ovxbUYATiulCRPOgq", Collections.singletonList(new SimpleGrantedAuthority(ROLE_USER)));
         }
         return new JwtUserDetails(2, "SE","giapham1","$2a$12$LWqqZDHGA4okGGyYjsQq8O7OtimL7KPaWqYDoxDQzm3YbuQn9Otcm", Collections.singletonList(new SimpleGrantedAuthority(ROLE_ADMIN)));
     }

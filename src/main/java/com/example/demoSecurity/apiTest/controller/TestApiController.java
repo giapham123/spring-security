@@ -9,10 +9,10 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.*;
 
-@Controller
+@RestController
+@RequestMapping("/login2/")
 public class TestApiController {
 
 
@@ -20,10 +20,10 @@ public class TestApiController {
     ITestApiService iTestApiService;
 
 
-    @GetMapping("/login2/aaa")
-    public ResponseEntity<?> login8() {
+    @GetMapping("/aaa")
+    public ResponseEntity<?> login8(@RequestParam("email") String email) {
         ResponseObject bizResponse = new ResponseObject();
-        TestApiModel aa = iTestApiService.getdata();
+        String aa = iTestApiService.getdata(email);
         bizResponse.setData(aa);
         return ResponseEntity.ok(bizResponse);
     }
