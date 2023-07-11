@@ -1,5 +1,30 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.example.demoSecurity.apiTest.mappers.DetailProductMapper">
-
+    <select id="getDetailProduct" resultType="ProductModel">
+        SELECT A.product_id productId,
+        A.name name,
+        A.price price,
+        A."desc" desc,
+        A.addr addr,
+        A.details details,
+        A.cate_cd cateCd,
+        A.cre_dt creDt,
+        A.updt_dt updDt,
+        A.user_id userId,
+        'http://localhost:8091/product-photos/' || A.image image,
+        B.shop_id shopId,
+        B.image imageShop,
+        B.desc descShop,
+        B.shop_nm shopNm
+        FROM public.products A, public."usersShop" B
+        WHERE A.user_id = B.shop_id
+        AND product_id = #{productId}
+    </select>
+    <select id="getLsImages" resultType="String">
+        SELECT
+        'http://localhost:8091/product-photos/' || image_url image
+        FROM public.images
+        WHERE product_id = #{productId}
+    </select>
 </mapper>

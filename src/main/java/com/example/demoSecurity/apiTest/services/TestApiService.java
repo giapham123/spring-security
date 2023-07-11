@@ -24,7 +24,7 @@ public class TestApiService implements ITestApiService{
         mailMessage.setTo(email);
         mailMessage.setSubject("Complete Registration!");
         mailMessage.setText("To confirm your account, please click here : "
-                +"http://localhost:8091/confirm-account?token="+UUID.randomUUID());
+                +"http://localhost:8091/login2/confirm-account?token="+UUID.randomUUID());
         emailService.sendEmail(mailMessage);
         return "Verify email by the link sent on your email address";
     }

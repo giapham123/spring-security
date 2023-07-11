@@ -3,9 +3,11 @@ import com.example.demoSecurity.apiTest.model.ProductModel;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
+import java.util.List;
+
 @Mapper
 public interface DetailProductMapper {
-    int insertProduct(ProductModel productModel);
+    ProductModel getDetailProduct(@Param("productId") Integer productId);
 
-    int insertImages(@Param("productId") Integer productId, @Param("imageUrl") String imageUrl );
+    List<String> getLsImages(@Param("productId") Integer productId);
 }

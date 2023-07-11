@@ -16,6 +16,42 @@ public class ProductModel {
     String userId;
     List<String> images;
     String image;
+    String shopId;
+    String imageShop;
+    String descShop;
+    String shopNm;
+
+    public String getShopId() {
+        return shopId;
+    }
+
+    public void setShopId(String shopId) {
+        this.shopId = shopId;
+    }
+
+    public String getImageShop() {
+        return imageShop;
+    }
+
+    public void setImageShop(String imageShop) {
+        this.imageShop = imageShop;
+    }
+
+    public String getDescShop() {
+        return descShop;
+    }
+
+    public void setDescShop(String descShop) {
+        this.descShop = descShop;
+    }
+
+    public String getShopNm() {
+        return shopNm;
+    }
+
+    public void setShopNm(String shopNm) {
+        this.shopNm = shopNm;
+    }
 
     public String getCateCd() {
         return cateCd;

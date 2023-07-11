@@ -28,6 +28,13 @@ public class TestApiController {
         return ResponseEntity.ok(bizResponse);
     }
 
+    @GetMapping("/confirm-account")
+    public ResponseEntity<?> confirm(@RequestParam("token")String confirmationToken) {
+        ResponseObject bizResponse = new ResponseObject();
+        bizResponse.setData("accountVerified");
+        return ResponseEntity.ok(bizResponse);
+    }
+
     @GetMapping("/login/aaa")
     public ResponseEntity<?> login() {
         ResponseObject bizResponse = new ResponseObject();
