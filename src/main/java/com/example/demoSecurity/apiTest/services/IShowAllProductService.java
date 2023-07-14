@@ -10,4 +10,6 @@ public interface IShowAllProductService {
 
     ResponseObject showAllProductViaUser(Integer userId) ;
 
+    ResponseObject showAllProductViaUserPage(Integer userId, Integer page) ;
+
 }

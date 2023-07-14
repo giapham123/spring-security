@@ -10,4 +10,6 @@ public interface DetailProductMapper {
     ProductModel getDetailProduct(@Param("productId") Integer productId);
 
     List<String> getLsImages(@Param("productId") Integer productId);
+
+    List<ProductModel> getRelatedProduct(@Param("cateCd") String cateCd);
 }

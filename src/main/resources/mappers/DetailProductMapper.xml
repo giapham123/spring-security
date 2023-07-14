@@ -27,4 +27,21 @@
         FROM public.images
         WHERE product_id = #{productId}
     </select>
+    <select id="getRelatedProduct" resultType="ProductModel">
+        SELECT product_id productId,
+        name name,
+        price price,
+        "desc" desc,
+        addr addr,
+        details details,
+        cate_cd cateCd,
+        cre_dt creDt,
+        updt_dt updDt,
+        user_id userId,
+        'http://localhost:8091/product-photos/' || image image
+        FROM public.products
+        WHERE cate_cd = #{cateCd}
+        ORDER BY cre_dt DESC
+        FETCH FIRST 10 ROW ONLY
+    </select>
 </mapper>

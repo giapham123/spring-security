@@ -24,5 +24,9 @@ public class ShowAllProductController {
         return iShowAllProductService.showAllProductViaUser(userId);
     }
 
+    @GetMapping("show-data-user/{userId}/{page}")
+    public ResponseObject showAllProductViaUserPage(@PathVariable("userId") Integer userId,@PathVariable("page") Integer page){
+        return iShowAllProductService.showAllProductViaUserPage(userId,page);
+    }
 
 }

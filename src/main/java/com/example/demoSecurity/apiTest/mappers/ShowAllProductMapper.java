@@ -11,7 +11,7 @@ public interface ShowAllProductMapper {
 
     List<ProductModel> getAllProductViaCategory(@Param("cateCd") String cateCd, @Param("page") Integer page);
 
-    List<ProductModel> getAllProductViaUser(@Param("userId") Integer userId);
+    List<ProductModel> getAllProductViaUser(@Param("userId") Integer userId, @Param("page") Integer page);
 
     ShopModel getDetailUser(@Param("userId") Integer userId);
 }

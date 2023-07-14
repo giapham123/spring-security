@@ -27,12 +27,21 @@ public class ShowAllProductService implements IShowAllProductService {
     public ResponseObject showAllProductViaUser(Integer userId) {
         ResponseObject rs = new ResponseObject();
         ShopModel shopRs = showAllProductMapper.getDetailUser(userId);
-        shopRs.setLsProduct(showAllProductMapper.getAllProductViaUser(userId));
+        shopRs.setLsProduct(showAllProductMapper.getAllProductViaUser(userId,0));
         rs.setData(shopRs);
         rs.setMessage("Get Data Success");
         rs.setSuccess(true);
         return rs;
     }
 
+    @Override
+    public ResponseObject showAllProductViaUserPage(Integer userId, Integer page) {
+        ResponseObject rs = new ResponseObject();
+        page = 10 * page;
+        rs.setData(showAllProductMapper.getAllProductViaUser(userId, page));
+        rs.setMessage("Get Data Success");
+        rs.setSuccess(true);
+        return rs;
+    }
 
 }

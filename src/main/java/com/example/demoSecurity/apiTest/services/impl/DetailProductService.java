@@ -7,7 +7,9 @@ import com.example.demoSecurity.apiTest.services.IDetailProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Service
 public class DetailProductService implements IDetailProductService {
@@ -20,8 +22,12 @@ public class DetailProductService implements IDetailProductService {
         ResponseObject rs = new ResponseObject();
         ProductModel resultDetails = productMapper.getDetailProduct(productId);
         List<String> rsImages = productMapper.getLsImages(productId);
+        List<ProductModel> rsRelated = productMapper.getRelatedProduct(resultDetails.getCateCd());
         resultDetails.setImages(rsImages);
-        rs.setData(resultDetails);
+        Map rsData = new HashMap();
+        rsData.put("productData",resultDetails);
+        rsData.put("related",rsRelated);
+        rs.setData(rsData);
         rs.setMessage("Get Data Success");
         rs.setSuccess(true);
         return rs;

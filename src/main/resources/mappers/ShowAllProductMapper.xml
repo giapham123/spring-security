@@ -33,10 +33,10 @@
         user_id userId,
         'http://localhost:8091/product-photos/' || image image
         FROM public.products
-        WHERE 1=1
+        WHERE user_id = #{userId}
         ORDER BY cre_dt DESC
-        OFFSET 20 ROWS
-        FETCH FIRST 20 ROW ONLY
+        OFFSET #{page} ROWS
+        FETCH FIRST 10 ROW ONLY
     </select>
 
     <select id="getDetailUser"  resultType="ShopModel">
@@ -45,5 +45,6 @@
         "desc" desc,
         shop_nm shopNm
         FROM public."usersShop"
+        WHERE shop_id = 1
     </select>
 </mapper>
