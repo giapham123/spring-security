@@ -8,6 +8,7 @@
     </settings>
     <typeAliases>
         <package name="com.example.demoSecurity.apiTest.model"/>
+        <package name="com.example.demoSecurity.Auth"/>
     </typeAliases>
     <mappers/>
 </configuration>

@@ -6,6 +6,7 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.web.authentication.WebAuthenticationDetailsSource;
 import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
@@ -48,12 +49,13 @@ public class JwtRequestFilter extends OncePerRequestFilter {
         // set user details on spring security context
         List<GrantedAuthority> listAuthorities = new ArrayList<GrantedAuthority>();
         listAuthorities.add(new SimpleGrantedAuthority("ROLE_USER"));
-        final JwtUserDetails userDetails ;
-        if(username.equals("giapham")){
-            userDetails = new JwtUserDetails(1,"JN", "giapham","$2a$12$pUb7IttKsTF0NcJfeEm6Ke5yXQyKeC5LrGQ.ovxbUYATiulCRPOgq", Collections.singletonList(new SimpleGrantedAuthority("ROLE_USER")));
-        }else{
-            userDetails = new JwtUserDetails(2, "SE","giapham1","$2a$12$LWqqZDHGA4okGGyYjsQq8O7OtimL7KPaWqYDoxDQzm3YbuQn9Otcm", Collections.singletonList(new SimpleGrantedAuthority("ROLE_ADMIN")));
-        }
+//        final JwtUserDetails userDetails ;
+        UserDetails userDetails  = jwtUserDetailsService.loadUserByUsername(username);
+//        if(username.equals("giapham")){
+//            userDetails = new JwtUserDetails(1,"JN", "giapham","$2a$12$pUb7IttKsTF0NcJfeEm6Ke5yXQyKeC5LrGQ.ovxbUYATiulCRPOgq", Collections.singletonList(new SimpleGrantedAuthority("ROLE_USER")));
+//        }else{
+//            userDetails = new JwtUserDetails(2, "SE","giapham1","$2a$12$LWqqZDHGA4okGGyYjsQq8O7OtimL7KPaWqYDoxDQzm3YbuQn9Otcm", Collections.singletonList(new SimpleGrantedAuthority("ROLE_ADMIN")));
+//        }
         //Store the details of who is authenticated with "UsernamePasswordAuthenticationToken"
         final UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(
                 userDetails, null, userDetails.getAuthorities());

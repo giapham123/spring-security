@@ -1,24 +1,27 @@
-package com.example.demoSecurity;
+package com.example.demoSecurity.Auth;
 
-import com.example.demoSecurity.Security.*;
-import com.example.demoSecurity.Shared.ResponseObject;
+import com.example.demoSecurity.Auth.mappers.LoginMapper;
+import com.example.demoSecurity.Security.AuthenticationRequest;
+import com.example.demoSecurity.Security.AuthenticationResponse;
+import com.example.demoSecurity.Security.JwtTokenService;
+import com.example.demoSecurity.Security.JwtUserDetailsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.server.ResponseStatusException;
 
+@Service
+public class loginService {
 
-@Controller
-class LoginController {
+    @Autowired
+    LoginMapper loginMapper;
 
     @Autowired
     JwtUserDetailsService jwtUserDetailsService;
@@ -29,8 +32,12 @@ class LoginController {
     @Autowired
     AuthenticationManager authenticationManager;
 
-    @PostMapping("/authenticate")
-    public ResponseEntity<String> authenticate(@RequestBody final AuthenticationRequest authenticationRequest) {
+
+    public loginModel getUserLogin(String email){
+        return loginMapper.getUserLogin(email);
+    }
+
+    public ResponseEntity<String> authenticate(final AuthenticationRequest authenticationRequest) {
         try {
             authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(
                     authenticationRequest.getLogin(), authenticationRequest.getPassword()));
@@ -43,6 +50,5 @@ class LoginController {
         return  new ResponseEntity<>(authenticationResponse.getAccessToken(),
                 HttpStatus.OK);
     }
+
 }
-
-
