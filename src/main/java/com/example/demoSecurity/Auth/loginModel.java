@@ -1,7 +1,7 @@
 package com.example.demoSecurity.Auth;
 
 public class loginModel {
-
+    private String id;
     private String image;
     private String desc;
     private String shopNm;
@@ -9,6 +9,14 @@ public class loginModel {
     private String email;
     private String pwd;
     private String usrNm;
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
 
     public String getImage() {
         return image;

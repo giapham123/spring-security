@@ -4,6 +4,7 @@
 
     <select id="getUserLogin" resultType="loginModel">
         SELECT
+        shop_id id,
         image,
         "desc" desc,
         shop_nm shopNm,
