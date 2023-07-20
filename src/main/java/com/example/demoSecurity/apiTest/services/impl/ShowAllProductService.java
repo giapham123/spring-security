@@ -44,4 +44,20 @@ public class ShowAllProductService implements IShowAllProductService {
         return rs;
     }
 
+    @Override
+    public ResponseObject getTotalData(String cateCd, Integer userId) {
+        ResponseObject rs = new ResponseObject();
+        if(userId == 0){
+            rs.setData(showAllProductMapper.countTotalProductCate(cateCd, userId));
+            rs.setMessage("Get Data Success");
+            rs.setSuccess(true);
+        }else {
+            rs.setData(showAllProductMapper.countTotalProductUser(cateCd, userId));
+            rs.setMessage("Get Data Success");
+            rs.setSuccess(true);
+        }
+
+        return rs;
+    }
+
 }

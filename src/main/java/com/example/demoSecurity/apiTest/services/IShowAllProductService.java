@@ -12,4 +12,6 @@ public interface IShowAllProductService {
 
     ResponseObject showAllProductViaUserPage(Integer userId, Integer page) ;
 
+    ResponseObject getTotalData(String cateCd,Integer userId);
+
 }

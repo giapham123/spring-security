@@ -28,5 +28,9 @@ public class ShowAllProductController {
     public ResponseObject showAllProductViaUserPage(@PathVariable("userId") Integer userId,@PathVariable("page") Integer page){
         return iShowAllProductService.showAllProductViaUserPage(userId,page);
     }
+    @GetMapping("total-data")
+    public ResponseObject getTotalData(@RequestParam("cateCd") String cateCd, @RequestParam("userId") Integer userId){
+        return iShowAllProductService.getTotalData(cateCd,userId);
+    }
 
 }

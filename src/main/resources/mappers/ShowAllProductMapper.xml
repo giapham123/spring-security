@@ -47,4 +47,18 @@
         FROM public."usersShop"
         WHERE shop_id = 1
     </select>
+
+    <select id="countTotalProductCate"  resultType="int">
+        SELECT count(product_id)
+        FROM public.products
+        WHERE 1 = 1
+        AND cate_cd = #{cateCd}
+    </select>
+
+    <select id="countTotalProductUser"  resultType="int">
+        SELECT count(product_id)
+        FROM public.products
+        WHERE 1 = 1
+        AND user_id = #{userId}
+    </select>
 </mapper>
