@@ -9,4 +9,11 @@ public interface ProductMapper {
     int insertProduct(ProductModel productModel);
 
     int insertImages(@Param("productId") Integer productId, @Param("imageUrl") String imageUrl );
+
+    int deleteProduct(@Param("productId") Integer productId);
+
+    int deleteImage(@Param("productId") Integer productId);
+
+    int updateForPublish(@Param("productId") Integer productId);
+
 }

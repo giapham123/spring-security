@@ -12,4 +12,9 @@ public interface IProductService {
     ResponseObject insertProduct(MultipartFile[] images,ProductModel productModel) ;
 
     ResponseEntity<byte[]> getImage(String fileNm);
+
+    ResponseObject deleteProduct(Integer productId) ;
+
+    ResponseObject publishProduct(Integer productId) ;
+
 }

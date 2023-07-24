@@ -20,6 +20,15 @@ public class ProductModel {
     String imageShop;
     String descShop;
     String shopNm;
+    boolean isPublish;
+
+    public boolean isPublish() {
+        return isPublish;
+    }
+
+    public void setPublish(boolean publish) {
+        isPublish = publish;
+    }
 
     public String getShopId() {
         return shopId;

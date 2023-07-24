@@ -97,6 +97,25 @@ public class ProductService implements IProductService {
         return ResponseEntity.ok().contentType(MediaType.IMAGE_JPEG).body(image);
     }
 
+    @Override
+    public ResponseObject deleteProduct(Integer productId) {
+        ResponseObject rs = new ResponseObject();
+        int isDelProduct = productMapper.deleteProduct(productId);
+        int isDelImg= productMapper.deleteImage(productId);
+        rs.setSuccess(true);
+        rs.setMessage("Xoá Thành Công");
+        return rs;
+    }
+
+    @Override
+    public ResponseObject publishProduct(Integer productId) {
+        ResponseObject rs = new ResponseObject();
+        rs.setMessage("Cập nhật thành công.");
+        rs.setSuccess(true);
+        rs.setData(productMapper.updateForPublish(productId));
+        return rs;
+    }
+
     public static HttpServletRequest getCurrentRequest() {
         try {
             RequestAttributes requestAttributes = RequestContextHolder.getRequestAttributes();

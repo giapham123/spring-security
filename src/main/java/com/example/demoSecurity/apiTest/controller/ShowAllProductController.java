@@ -14,23 +14,23 @@ public class ShowAllProductController {
     @Autowired
     IShowAllProductService iShowAllProductService;
 
-    @GetMapping("show-data-category/{category}/{page}")
-    public ResponseObject showAllProductViaCategory(@PathVariable("category") String category,@PathVariable("page") Integer page){
-        return iShowAllProductService.showAllProductViaCategory(category,page);
+    @GetMapping("show-data-category/{category}/{page}/{edit}")
+    public ResponseObject showAllProductViaCategory(@PathVariable("category") String category,@PathVariable("page") Integer page,@PathVariable("edit") Integer edit){
+        return iShowAllProductService.showAllProductViaCategory(category,page, edit);
     }
 
-    @GetMapping("show-data-user/{userId}")
-    public ResponseObject showAllProductViaUser(@PathVariable("userId") Integer userId){
-        return iShowAllProductService.showAllProductViaUser(userId);
+    @GetMapping("show-data-user/{userId}/{edit}")
+    public ResponseObject showAllProductViaUser(@PathVariable("userId") Integer userId,@PathVariable("edit") Integer edit){
+        return iShowAllProductService.showAllProductViaUser(userId, edit);
     }
 
-    @GetMapping("show-data-user/{userId}/{page}")
-    public ResponseObject showAllProductViaUserPage(@PathVariable("userId") Integer userId,@PathVariable("page") Integer page){
-        return iShowAllProductService.showAllProductViaUserPage(userId,page);
+    @GetMapping("show-data-user/{userId}/{page}/{edit}")
+    public ResponseObject showAllProductViaUserPage(@PathVariable("userId") Integer userId,@PathVariable("page") Integer page,@PathVariable("edit") Integer edit){
+        return iShowAllProductService.showAllProductViaUserPage(userId,page,edit);
     }
     @GetMapping("total-data")
-    public ResponseObject getTotalData(@RequestParam("cateCd") String cateCd, @RequestParam("userId") Integer userId){
-        return iShowAllProductService.getTotalData(cateCd,userId);
+    public ResponseObject getTotalData(@RequestParam("cateCd") String cateCd, @RequestParam("userId") Integer userId,@RequestParam("edit") Integer edit){
+        return iShowAllProductService.getTotalData(cateCd,userId,edit);
     }
 
 }

@@ -6,12 +6,12 @@ import org.springframework.web.multipart.MultipartFile;
 
 public interface IShowAllProductService {
 
-    ResponseObject showAllProductViaCategory(String cate, Integer page) ;
+    ResponseObject showAllProductViaCategory(String cate, Integer page, Integer edit) ;
 
-    ResponseObject showAllProductViaUser(Integer userId) ;
+    ResponseObject showAllProductViaUser(Integer userId, Integer edit) ;
 
-    ResponseObject showAllProductViaUserPage(Integer userId, Integer page) ;
+    ResponseObject showAllProductViaUserPage(Integer userId, Integer page, Integer edit) ;
 
-    ResponseObject getTotalData(String cateCd,Integer userId);
+    ResponseObject getTotalData(String cateCd,Integer userId, Integer edit);
 
 }

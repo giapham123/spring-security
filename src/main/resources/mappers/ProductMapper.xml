@@ -20,4 +20,15 @@
         VALUES (#{productId},#{imageUrl})
     </insert>
 
+    <delete id="deleteProduct">
+        DELETE FROM public.products WHERE PRODUCT_ID = #{productId}
+    </delete>
+
+    <delete id="deleteImage">
+        DELETE FROM public.images WHERE PRODUCT_ID = #{productId}
+    </delete>
+
+    <delete id="updateForPublish">
+        UPDATE public.products SET is_publish = true WHERE PRODUCT_ID = #{productId}
+    </delete>
 </mapper>

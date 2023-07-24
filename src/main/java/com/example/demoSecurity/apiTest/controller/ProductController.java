@@ -39,4 +39,14 @@ public class ProductController {
     public ResponseEntity<byte[]> getImage(@PathVariable("filename") String filename) {
         return iProductService.getImage(filename);
     }
+
+    @GetMapping("delete-product")
+    public ResponseObject deleteProduct(@RequestParam("productId") Integer productId){
+        return iProductService.deleteProduct(productId);
+    }
+
+    @GetMapping("publish-product")
+    public ResponseObject publishProduct(@RequestParam("productId") Integer productId){
+        return iProductService.publishProduct(productId);
+    }
 }

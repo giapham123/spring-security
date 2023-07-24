@@ -14,20 +14,20 @@ public class ShowAllProductService implements IShowAllProductService {
     ShowAllProductMapper showAllProductMapper;
 
     @Override
-    public ResponseObject showAllProductViaCategory(String cate,Integer page) {
+    public ResponseObject showAllProductViaCategory(String cate,Integer page, Integer edit) {
         ResponseObject rs = new ResponseObject();
         page = 10 * page;
-        rs.setData(showAllProductMapper.getAllProductViaCategory(cate, page));
+        rs.setData(showAllProductMapper.getAllProductViaCategory(cate, page, edit));
         rs.setMessage("Get Data Success");
         rs.setSuccess(true);
         return rs;
     }
 
     @Override
-    public ResponseObject showAllProductViaUser(Integer userId) {
+    public ResponseObject showAllProductViaUser(Integer userId, Integer edit) {
         ResponseObject rs = new ResponseObject();
         ShopModel shopRs = showAllProductMapper.getDetailUser(userId);
-        shopRs.setLsProduct(showAllProductMapper.getAllProductViaUser(userId,0));
+        shopRs.setLsProduct(showAllProductMapper.getAllProductViaUser(userId,0, edit));
         rs.setData(shopRs);
         rs.setMessage("Get Data Success");
         rs.setSuccess(true);
@@ -35,29 +35,27 @@ public class ShowAllProductService implements IShowAllProductService {
     }
 
     @Override
-    public ResponseObject showAllProductViaUserPage(Integer userId, Integer page) {
+    public ResponseObject showAllProductViaUserPage(Integer userId, Integer page, Integer edit) {
         ResponseObject rs = new ResponseObject();
         page = 10 * page;
-        rs.setData(showAllProductMapper.getAllProductViaUser(userId, page));
+        rs.setData(showAllProductMapper.getAllProductViaUser(userId, page,edit));
         rs.setMessage("Get Data Success");
         rs.setSuccess(true);
         return rs;
     }
 
     @Override
-    public ResponseObject getTotalData(String cateCd, Integer userId) {
+    public ResponseObject getTotalData(String cateCd, Integer userId, Integer edit) {
         ResponseObject rs = new ResponseObject();
         if(userId == 0){
-            rs.setData(showAllProductMapper.countTotalProductCate(cateCd, userId));
+            rs.setData(showAllProductMapper.countTotalProductCate(cateCd, userId,edit));
             rs.setMessage("Get Data Success");
             rs.setSuccess(true);
         }else {
-            rs.setData(showAllProductMapper.countTotalProductUser(cateCd, userId));
+            rs.setData(showAllProductMapper.countTotalProductUser(cateCd, userId,edit));
             rs.setMessage("Get Data Success");
             rs.setSuccess(true);
         }
-
         return rs;
     }
-
 }
