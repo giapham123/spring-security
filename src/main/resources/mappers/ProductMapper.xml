@@ -29,6 +29,6 @@
     </delete>
 
     <delete id="updateForPublish">
-        UPDATE public.products SET is_publish = true WHERE PRODUCT_ID = #{productId}
+        UPDATE public.products SET is_publish = true, updt_dt = CURRENT_TIMESTAMP WHERE PRODUCT_ID = #{productId}
     </delete>
 </mapper>
