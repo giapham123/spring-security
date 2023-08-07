@@ -11,6 +11,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 import org.springframework.web.context.request.RequestAttributes;
 import org.springframework.web.context.request.RequestContextHolder;
@@ -41,6 +43,8 @@ public class ProductService implements IProductService {
     @Transactional
     public ResponseObject insertProduct(MultipartFile[] images,ProductModel productModel) {
         ResponseObject rs = new ResponseObject();
+        Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        productModel.setUserId(((UserDetails)principal).getUsername());
         List<String> imagesString = new ArrayList<>();
         int count = 0;
         int id =0;

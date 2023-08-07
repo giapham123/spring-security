@@ -6,19 +6,19 @@
         A.name name,
         A.price price,
         A."desc" desc,
-        A.addr addr,
+        B.addr addr,
         A.details details,
         A.cate_cd cateCd,
         A.cre_dt creDt,
         A.updt_dt updDt,
-        A.user_id userId,
+        A.user_lg userId,
         'http://localhost:8091/product-photos/' || A.image image,
         B.shop_id shopId,
         B.image imageShop,
         B.desc descShop,
         B.shop_nm shopNm
         FROM public.products A, public."usersShop" B
-        WHERE A.user_id = B.shop_id
+        WHERE A.user_lg = B.email
         AND product_id = #{productId}
     </select>
     <select id="getLsImages" resultType="String">
@@ -28,20 +28,21 @@
         WHERE product_id = #{productId}
     </select>
     <select id="getRelatedProduct" resultType="ProductModel">
-        SELECT product_id productId,
-        name name,
-        price price,
-        "desc" desc,
-        addr addr,
-        details details,
-        cate_cd cateCd,
-        cre_dt creDt,
-        updt_dt updDt,
-        user_id userId,
-        'http://localhost:8091/product-photos/' || image image
-        FROM public.products
-        WHERE cate_cd = #{cateCd}
-        ORDER BY cre_dt DESC
+        SELECT a.product_id productId,
+        a.name name,
+        a.price price,
+        a."desc" desc,
+        b.addr addr,
+        a.details details,
+        a.cate_cd cateCd,
+        a.cre_dt creDt,
+        a.updt_dt updDt,
+        a.user_lg userId,
+        'http://localhost:8091/product-photos/' || a.image image
+        FROM public.products a left join public."usersShop" b
+        on a.user_lg = b.email
+        WHERE a.cate_cd = #{cateCd}
+        ORDER BY a.cre_dt DESC
         FETCH FIRST 10 ROW ONLY
     </select>
 </mapper>

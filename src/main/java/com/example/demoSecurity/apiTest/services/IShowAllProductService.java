@@ -8,9 +8,9 @@ public interface IShowAllProductService {
 
     ResponseObject showAllProductViaCategory(String cate, Integer page, Integer edit) ;
 
-    ResponseObject showAllProductViaUser(Integer userId, Integer edit) ;
+    ResponseObject showAllProductViaUser(String userId, Integer edit) ;
 
-    ResponseObject showAllProductViaUserPage(Integer userId, Integer page, Integer edit) ;
+    ResponseObject showAllProductViaUserPage(String userId, Integer page, Integer edit) ;
 
     ResponseObject getTotalData(String cateCd,Integer userId, Integer edit);
 

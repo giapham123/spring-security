@@ -11,8 +11,8 @@
     <insert id="insertProduct"
             parameterType="ProductModel"
             useGeneratedKeys="true" keyProperty="productId" keyColumn="product_id">
-        INSERT INTO products (name, price, "desc", addr, details, cate_cd, user_id, image)
-        VALUES (#{name},#{price},#{desc},#{addr},#{details},#{cateCd}, 1, #{image})
+        INSERT INTO products (name, price, "desc", addr, details, cate_cd, user_lg, image)
+        VALUES (#{name},#{price},#{desc},#{addr},#{details},#{cateCd}, #{userId}, #{image})
     </insert>
 
     <insert id="insertImages">

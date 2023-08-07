@@ -2,47 +2,48 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.example.demoSecurity.apiTest.mappers.ShowAllProductMapper">
    <select id="getAllProductViaCategory"  resultType="ProductModel">
-       SELECT product_id productId,
-       name name,
-       price price,
-       "desc" desc,
-       addr addr,
-       details details,
-       cate_cd cateCd,
-       cre_dt creDt,
-       updt_dt updDt,
-       user_id userId,
-       'http://localhost:8091/product-photos/' || image image,
-       is_publish isPublish
-       FROM public.products
-       WHERE cate_cd = #{cateCd}
+       SELECT a.product_id productId,
+       a.name name,
+       a.price price,
+       a."desc" desc,
+       b.addr addr,
+       a.details details,
+       a.cate_cd cateCd,
+       a.cre_dt creDt,
+       a.updt_dt updDt,
+       a.user_lg userId,
+       'http://localhost:8091/product-photos/' || a.image image
+       FROM public.products a left join public."usersShop" b
+       on a.user_lg = b.email
+       WHERE a.cate_cd = #{cateCd}
        <if test="edit != 0">
-           AND is_publish = true
+           AND a.is_publish = true
        </if>
-       ORDER BY updt_dt DESC
+       ORDER BY a.updt_dt DESC
        OFFSET #{page} ROWS
        FETCH FIRST 10 ROW ONLY
    </select>
 
     <select id="getAllProductViaUser"  resultType="ProductModel">
-        SELECT product_id productId,
-        name name,
-        price price,
-        "desc" desc,
-        addr addr,
-        details details,
-        cate_cd cateCd,
-        cre_dt creDt,
-        updt_dt updDt,
-        user_id userId,
-        'http://localhost:8091/product-photos/' || image image,
-        is_publish isPublish
-        FROM public.products
-        WHERE user_id = #{userId}
+        SELECT a.product_id productId,
+        a.name name,
+        a.price price,
+        a."desc" desc,
+        b.addr addr,
+        a.details details,
+        a.cate_cd cateCd,
+        a.cre_dt creDt,
+        a.updt_dt updDt,
+        a.user_lg userId,
+        'http://localhost:8091/product-photos/' || a.image image,
+        is_publish publish
+        FROM public.products a left join public."usersShop" b
+        on a.user_lg = b.email
+        WHERE a.user_lg = #{userId}
         <if test="edit != 0">
-            AND is_publish = true
+            AND a.is_publish = true
         </if>
-        ORDER BY updt_dt DESC
+        ORDER BY a.updt_dt DESC
         OFFSET #{page} ROWS
         FETCH FIRST 10 ROW ONLY
     </select>
@@ -94,7 +95,7 @@
         SELECT count(product_id)
         FROM public.products
         WHERE 1 = 1
-        AND user_id = #{userId}
+        AND user_lg = #{userId}
         <if test="edit != 0">
             AND is_publish = true
         </if>

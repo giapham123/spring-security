@@ -2,18 +2,19 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.example.demoSecurity.apiTest.mappers.HomeProductMapper">
     <select id="getNewestProduct"  resultType="ProductModel">
-        SELECT product_id productId,
-        name name,
-        price price,
-        "desc" desc,
-        addr addr,
-        details details,
-        cate_cd cateCd,
-        cre_dt creDt,
-        updt_dt updDt,
-        user_id userId,
-        'http://localhost:8091/product-photos/' || image image
-        FROM public.products
+        SELECT a.product_id productId,
+        a.name name,
+        a.price price,
+        a."desc" desc,
+        b.addr addr,
+        a.details details,
+        a.cate_cd cateCd,
+        a.cre_dt creDt,
+        a.updt_dt updDt,
+        a.user_lg userId,
+        'http://localhost:8091/product-photos/' || a.image image
+        FROM public.products a left join public."usersShop" b
+        on a.user_lg = b.email
         ORDER BY cre_dt DESC
         LIMIT 10
     </select>

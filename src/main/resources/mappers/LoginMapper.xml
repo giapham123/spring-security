@@ -15,5 +15,9 @@
         FROM public."usersShop"
         WHERE email = #{email}
     </select>
-
+    <insert id="insertUserShop">
+        INSERT INTO public."usersShop"(
+        image, "desc", shop_nm, email, pwd, usr_nm, addr, phone)
+        VALUES ( #{img}, #{desc}, #{shopNm}, #{email}, #{pwd}, '123', #{addr}, #{phone});
+    </insert>
 </mapper>

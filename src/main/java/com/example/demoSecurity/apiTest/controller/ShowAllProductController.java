@@ -20,12 +20,12 @@ public class ShowAllProductController {
     }
 
     @GetMapping("show-data-user/{userId}/{edit}")
-    public ResponseObject showAllProductViaUser(@PathVariable("userId") Integer userId,@PathVariable("edit") Integer edit){
+    public ResponseObject showAllProductViaUser(@PathVariable("userId") String userId,@PathVariable("edit") Integer edit){
         return iShowAllProductService.showAllProductViaUser(userId, edit);
     }
 
     @GetMapping("show-data-user/{userId}/{page}/{edit}")
-    public ResponseObject showAllProductViaUserPage(@PathVariable("userId") Integer userId,@PathVariable("page") Integer page,@PathVariable("edit") Integer edit){
+    public ResponseObject showAllProductViaUserPage(@PathVariable("userId") String  userId,@PathVariable("page") Integer page,@PathVariable("edit") Integer edit){
         return iShowAllProductService.showAllProductViaUserPage(userId,page,edit);
     }
     @GetMapping("total-data")
