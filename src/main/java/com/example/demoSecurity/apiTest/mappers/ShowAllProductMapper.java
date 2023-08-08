@@ -13,7 +13,7 @@ public interface ShowAllProductMapper {
 
     List<ProductModel> getAllProductViaUser(@Param("userId") String userId, @Param("page") Integer page, @Param("edit") Integer edit);
 
-    ShopModel getDetailUser(@Param("userId") String userId);
+    ShopModel getDetailUser(@Param("email") String email);
 
     int countTotalProductCate(@Param("cateCd") String cateCd,@Param("userId") Integer userId,@Param("edit") Integer edit);
 

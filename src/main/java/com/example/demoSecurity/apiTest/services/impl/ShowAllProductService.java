@@ -29,7 +29,7 @@ public class ShowAllProductService implements IShowAllProductService {
     public ResponseObject showAllProductViaUser(String userId, Integer edit) {
         ResponseObject rs = new ResponseObject();
         Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        ShopModel shopRs = showAllProductMapper.getDetailUser(userId);
+        ShopModel shopRs = showAllProductMapper.getDetailUser(((UserDetails)principal).getUsername());
         shopRs.setLsProduct(showAllProductMapper.getAllProductViaUser(((UserDetails)principal).getUsername(),0, edit));
         rs.setData(shopRs);
         rs.setMessage("Get Data Success");

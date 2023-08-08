@@ -76,9 +76,10 @@
         SELECT shop_id userId,
         image img,
         "desc" desc,
-        shop_nm shopNm
+        shop_nm shopNm,
+        addr
         FROM public."usersShop"
-        WHERE shop_id = 1
+        WHERE email = #{email}
     </select>
 
     <select id="countTotalProductCate"  resultType="int">
