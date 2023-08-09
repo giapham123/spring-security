@@ -4,6 +4,12 @@ plugins {
 	id 'io.spring.dependency-management' version '1.0.15.RELEASE'
 }
 
+
+apply plugin: 'java'
+apply plugin: 'org.springframework.boot'
+apply plugin: 'io.spring.dependency-management'
+apply plugin: 'war'
+
 group = 'com.example'
 version = '0.0.1-SNAPSHOT'
 sourceCompatibility = '1.8'
@@ -34,4 +40,20 @@ dependencies {
 
 tasks.named('test') {
 	useJUnitPlatform()
+}
+
+
+war {
+	archiveFileName = 'ROOT.war'
+	from(sourceSets.main.output) {
+		into 'WEB-INF/classes'
+	}
+}
+tasks.withType(War).all {
+	duplicatesStrategy 'exclude'
+//	archiveName = rootProject.ext.warPackageName
+//	group 'build_war'
+	description 'Publish WAR package for websphere server'
+	destinationDir = file("$buildDir/../out/artifacts")
+
 }
