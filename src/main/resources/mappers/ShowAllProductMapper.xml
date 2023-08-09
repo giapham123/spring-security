@@ -12,7 +12,7 @@
        a.cre_dt creDt,
        a.updt_dt updDt,
        a.user_lg userId,
-       'http://localhost:8091/product-photos/' || a.image image
+       'product-photos/' || a.image image
        FROM public.products a left join public."usersShop" b
        on a.user_lg = b.email
        WHERE a.cate_cd = #{cateCd}
@@ -35,7 +35,7 @@
         a.cre_dt creDt,
         a.updt_dt updDt,
         a.user_lg userId,
-        'http://localhost:8091/product-photos/' || a.image image,
+        '/product-photos/' || a.image image,
         is_publish publish
         FROM public.products a left join public."usersShop" b
         on a.user_lg = b.email

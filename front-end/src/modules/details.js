@@ -58,7 +58,7 @@ const Details = () => {
                     <Col xs={22} sm={12} md={12} lg={12} xl={10} >
                         <Carousel autoPlay>
                             {images.map((item, index) => (<div key={index} style={{ height: "450px" }}>
-                                <img src={item} style={{ height: "100%", width: "100%", objectFit: 'contain' }} />
+                                <img src={`${process.env.REACT_APP_SHOP}` +`${item}`}  style={{ height: "100%", width: "100%", objectFit: 'contain' }} />
                             </div>))}
                         </Carousel>
                     </Col>
@@ -70,7 +70,7 @@ const Details = () => {
                             <List.Item
                             >
                                 <List.Item.Meta
-                                    avatar={<Avatar src={productInf.imageShop} />}
+                                    avatar={<Avatar src={`${process.env.REACT_APP_SHOP}` +`${productInf.imageShop}`} />}
                                     title={<a href={"/personal-page/" + productInf.userId}>{productInf.shopNm}</a>}
                                 // description={productInf.descShop}
                                 />
@@ -149,7 +149,7 @@ const Details = () => {
                                             // style={{ height: 300 }}
                                             hoverable
                                             cover={<img width={272} height={200}
-                                                alt="logo" src={item.image} />}
+                                                alt="logo" src={`${process.env.REACT_APP_SHOP}` +`${item.image}`} />}
                                         >
                                             <Meta className='styleMeta' title={item.name} />
                                             <List.Item.Meta title={<div style={{ color: '#B70404' }}>{String(item.price).replace(

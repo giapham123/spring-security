@@ -154,7 +154,7 @@ function AllProduct() {
                                             // style={{ height: 300 }}
                                             hoverable
                                             cover={<img width={272} height={200}
-                                                alt="logo" src={item.image} />}
+                                                alt="logo" src={`${process.env.REACT_APP_SHOP}` +`${item.image}`} />}
                                         >
                                             <Meta className='styleMeta' title={item.name} />
                                             <List.Item.Meta title={<div style={{ color: '#B70404' }}>{String(item.price).replace(

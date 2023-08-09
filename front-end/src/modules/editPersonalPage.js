@@ -263,7 +263,7 @@ function EditPersonalPage() {
                                                 <Card
                                                     hoverable
                                                     cover={<img width={272} height={200}
-                                                        alt="logo" src={item.image} />}
+                                                        alt="logo" src={`${process.env.REACT_APP_SHOP}` +`${item.image}`} />}
                                                     actions={[
                                                         // <DeleteTwoTone twoToneColor="red" key="delete" />,
                                                         <CheckCircleTwoTone twoToneColor="#52c41a" key="publish" onClick={() => dispatch(publishProduct({ productId: item.productId }))} />,
@@ -278,7 +278,7 @@ function EditPersonalPage() {
                                                 </Card> : <Card
                                                     hoverable
                                                     cover={<img width={272} height={200}
-                                                        alt="logo" src={item.image} />}
+                                                        alt="logo" src={`${process.env.REACT_APP_SHOP}` +`${item.image}`} />}
                                                     actions={[
                                                         // <DeleteTwoTone twoToneColor="red" key="delete" />,
                                                         <CloseCircleTwoTone twoToneColor="red" key="publish" onClick={() => dispatch(publishProduct({ productId: item.productId }))} />,
