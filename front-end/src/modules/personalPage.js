@@ -154,7 +154,7 @@ function PersonalPage() {
                                 <Col xs={16} sm={16} md={16} lg={16} xl={12} style={{paddingRight:"50px"}}>
                                     <List.Item>
                                         <List.Item.Meta
-                                            avatar={<Avatar src={rsPersonal.img} />}
+                                            avatar={<Avatar src={`${process.env.REACT_APP_SHOP}` +`${rsPersonal.img}`} />}
                                             title={rsPersonal.shopNm}
                                             description={rsPersonal.desc}
                                         />

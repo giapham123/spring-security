@@ -135,7 +135,7 @@ function MenuBarComp() {
         // });
       },
       activeIcon: <LoginOutlined color="#fff" />,
-      render: () => tokenIsExpired() == true ? <Avatar size="small" src={loginState.userDetail.image} icon={<UserOutlined />} /> : <LoginOutlined color="#fff" />,
+      render: () => tokenIsExpired() == true ? <Avatar size="small" src={`${process.env.REACT_APP_SHOP}` +`${loginState.userDetail.image}`} icon={<UserOutlined />} /> : <LoginOutlined color="#fff" />,
     },
   ];
   const handlePostBtn = () => {
@@ -182,7 +182,7 @@ function MenuBarComp() {
                   pointAtCenter: true,
                 }}
               >
-                <Avatar size="large" src={loginState.userDetail.image} icon={<UserOutlined />} />
+                <Avatar size="large" src={`${process.env.REACT_APP_SHOP}` +`${loginState.userDetail.image}`} icon={<UserOutlined />} />
               </Dropdown>
               : <Button onClick={openPopupAddress}>
                 Tài Khoản

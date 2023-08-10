@@ -5,7 +5,7 @@
     <select id="getUserLogin" resultType="loginModel">
         SELECT
         shop_id id,
-        image,
+        'product-photos/' || image image,
         "desc" desc,
         shop_nm shopNm,
         crt_dt crtDt,

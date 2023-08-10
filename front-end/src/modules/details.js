@@ -71,7 +71,7 @@ const Details = () => {
                             >
                                 <List.Item.Meta
                                     avatar={<Avatar src={`${process.env.REACT_APP_SHOP}` +`${productInf.imageShop}`} />}
-                                    title={<a href={"/personal-page/" + productInf.userId}>{productInf.shopNm}</a>}
+                                    title={<a href={"/personal-page/" + productInf.shopId}>{productInf.shopNm}</a>}
                                 // description={productInf.descShop}
                                 />
                                 <Row>

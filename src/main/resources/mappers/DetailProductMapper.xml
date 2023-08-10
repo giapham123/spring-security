@@ -14,7 +14,7 @@
         A.user_lg userId,
         'product-photos/' || A.image image,
         B.shop_id shopId,
-        B.image imageShop,
+        'product-photos/' || B.image imageShop,
         B.desc descShop,
         B.shop_nm shopNm
         FROM public.products A, public."usersShop" B

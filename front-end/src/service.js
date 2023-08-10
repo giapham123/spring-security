@@ -29,7 +29,6 @@ export default class Service {
     axios.defaults.headers.common['Accept'] = '*/*';
     axios.defaults.headers.common['Authorization'] = `Bearer ${localStorage.getItem('token')}`;
     const endpoint = `${process.env.REACT_APP_SHOP}`
-    console.log(endpoint)
     const baseURL = endpoint + (namespace ? `/${namespace}/` : '/');
     this.axios = axios.create({
       baseURL,
