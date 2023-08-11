@@ -41,12 +41,12 @@ const Details = () => {
             setImages(rsDetailsProduct.images)
             setProductInf(rsDetailsProduct)
             var arrDetails = []
-            for (let i = 0; i < rsDetailsProduct.details.split(';').length - 1; i++) {
-                arrDetails.push({
-                    key: rsDetailsProduct.details.split(';')[i].split(':')[0],
-                    value: rsDetailsProduct.details.split(';')[i].split(':')[1]
-                })
-            }
+            // for (let i = 0; i < rsDetailsProduct.details.split(';').length - 1; i++) {
+            //     arrDetails.push({
+            //         key: rsDetailsProduct.details.split(';')[i].split(':')[0],
+            //         value: rsDetailsProduct.details.split(';')[i].split(':')[1]
+            //     })
+            // }
             setDetails(arrDetails)
         }
     }, [rsDetailsProduct]);
@@ -92,7 +92,7 @@ const Details = () => {
                                         <b> Địa Chỉ:</b> {productInf.addr}
                                     </Col>
                                 </Row>
-                                <List>
+                                {/* <List>
                                     <Row >
                                         {
                                             details.map((listitem, index) => {
@@ -108,7 +108,7 @@ const Details = () => {
                                             })
                                         }
                                     </Row>
-                                </List>
+                                </List> */}
 
 
                                 <Row>

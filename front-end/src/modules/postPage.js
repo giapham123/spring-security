@@ -72,11 +72,11 @@ function PostPage() {
         }
         var formData = new FormData();
         var lisFile = new Array();
-        var details = '';
-        for (let i = 0; i < value.detailsProduct.length; i++) {
-            details += value.detailsProduct[i].name + ':' + value.detailsProduct[i].desc + ';'
-        }
-        value.details = details
+        // var details = '';
+        // for (let i = 0; i < value.detailsProduct.length; i++) {
+        //     details += value.detailsProduct[i].name + ':' + value.detailsProduct[i].desc + ';'
+        // }
+        // value.details = details
         lisFile.push(fileList[0].originFileObj)
         for (let i = 0; i < fileList.length; i++) {
             formData.append('images', fileList[i].originFileObj)
@@ -137,9 +137,14 @@ function PostPage() {
                                             name="price"
                                             rules={[{ required: true, message: 'Vui lòng nhập giá sản phẩm' }]}
                                         >
-                                            <InputNumber style={{ width: '100%' }}
+                                            <InputNumber style={{ width: '100%' }} 
                                                 formatter={(value) => `${value}`.replace(/\B(?=(\d{3})+(?!\d))/g, ',')}
                                                 parser={(value) => value.replace(/\$\s?|(,*)/g, '')}
+                                                onKeyPress={(event) => {
+                                                    if (!/[0-9]/.test(event.key)) {
+                                                        event.preventDefault();
+                                                    }
+                                                }}
                                             />
                                         </Form.Item>
 
@@ -151,7 +156,7 @@ function PostPage() {
                                         >
                                             <TextArea onInput={e => e.target.value = e.target.value.charAt(0).toUpperCase() + e.target.value.slice(1)} rows={7} placeholder="Mô tả sản phẩm &#10;Mô tả chi tiết một số đặc điểm của sản phẩm:  &#10;- Sản phẩm: Tên, số lượng, thương hiệu, xuất xứ  &#10;- Thời gian sử dụng  &#10;- Chấp nhận thanh toán  &#10;- Chính sách bảo hành bảo trì" />
                                         </Form.Item>
-                                        <Form.Item
+                                        {/* <Form.Item
                                             label="Thông Tin Chi Tiết" rules={[{ required: true, message: 'Vui lòng nhập thông tin' }]}>
                                             <Form.List name="detailsProduct">
                                                 {(fields, { add, remove }) => (
@@ -216,7 +221,7 @@ function PostPage() {
                                                     </>
                                                 )}
                                             </Form.List>
-                                        </Form.Item>
+                                        </Form.Item> */}
                                         {/* <Row >
                                             <Col xs={22} sm={18} md={18} lg={18} xl={20}>
                                                 <Form.Item
