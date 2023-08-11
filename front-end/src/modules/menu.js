@@ -14,7 +14,7 @@ import { useSelector, useDispatch } from 'react-redux'
 import { useEffect } from 'react';
 const itemsMenu = [
   {
-    label: 'Trang Chủ',
+    // label: 'Trang Chủ',
     key: '',
     icon: <HomeOutlined />
   },

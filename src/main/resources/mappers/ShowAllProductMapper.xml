@@ -101,4 +101,15 @@
             AND is_publish = true
         </if>
     </select>
+
+    <select id="getUserEmail"  resultType="ShopModel">
+        SELECT shop_id userId,
+        'product-photos/' || image img,
+        "desc" desc,
+        shop_nm shopNm,
+        email email,
+        addr
+        FROM public."usersShop"
+        WHERE shop_id = #{userId}
+    </select>
 </mapper>

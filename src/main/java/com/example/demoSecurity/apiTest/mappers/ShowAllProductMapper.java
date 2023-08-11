@@ -19,4 +19,6 @@ public interface ShowAllProductMapper {
 
     int countTotalProductUser(@Param("cateCd") String cateCd,@Param("userId") String userId,@Param("edit") Integer edit);
 
+    ShopModel getUserEmail(@Param("userId") Integer userId);
+
 }

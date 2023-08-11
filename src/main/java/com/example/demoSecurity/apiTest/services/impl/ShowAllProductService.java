@@ -26,11 +26,11 @@ public class ShowAllProductService implements IShowAllProductService {
     }
 
     @Override
-    public ResponseObject showAllProductViaUser(String userId, Integer edit) {
+    public ResponseObject showAllProductViaUser(Integer userId, Integer edit) {
         ResponseObject rs = new ResponseObject();
-        Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        ShopModel shopRs = showAllProductMapper.getDetailUser(((UserDetails)principal).getUsername());
-        shopRs.setLsProduct(showAllProductMapper.getAllProductViaUser(((UserDetails)principal).getUsername(),0, edit));
+//        Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        ShopModel shopRs = showAllProductMapper.getDetailUser(getUserEmail(userId).getEmail());
+        shopRs.setLsProduct(showAllProductMapper.getAllProductViaUser(getUserEmail(userId).getEmail(),0, edit));
         rs.setData(shopRs);
         rs.setMessage("Get Data Success");
         rs.setSuccess(true);
@@ -38,11 +38,11 @@ public class ShowAllProductService implements IShowAllProductService {
     }
 
     @Override
-    public ResponseObject showAllProductViaUserPage(String userId, Integer page, Integer edit) {
+    public ResponseObject showAllProductViaUserPage(Integer userId, Integer page, Integer edit) {
         ResponseObject rs = new ResponseObject();
-        Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+//        Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         page = 10 * page;
-        rs.setData(showAllProductMapper.getAllProductViaUser(((UserDetails)principal).getUsername(), page,edit));
+        rs.setData(showAllProductMapper.getAllProductViaUser(getUserEmail(userId).getEmail(), page,edit));
         rs.setMessage("Get Data Success");
         rs.setSuccess(true);
         return rs;
@@ -51,16 +51,20 @@ public class ShowAllProductService implements IShowAllProductService {
     @Override
     public ResponseObject getTotalData(String cateCd, Integer userId, Integer edit) {
         ResponseObject rs = new ResponseObject();
-        Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+//        Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         if(userId == 0){
             rs.setData(showAllProductMapper.countTotalProductCate(cateCd, userId,edit));
             rs.setMessage("Get Data Success");
             rs.setSuccess(true);
         }else {
-            rs.setData(showAllProductMapper.countTotalProductUser(cateCd, ((UserDetails)principal).getUsername(),edit));
+            rs.setData(showAllProductMapper.countTotalProductUser(cateCd, getUserEmail(userId).getEmail(),edit));
             rs.setMessage("Get Data Success");
             rs.setSuccess(true);
         }
         return rs;
+    }
+
+    public ShopModel getUserEmail(Integer userId){
+        return showAllProductMapper.getUserEmail(userId);
     }
 }
