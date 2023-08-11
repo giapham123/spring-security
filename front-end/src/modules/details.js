@@ -19,6 +19,14 @@ const Details = () => {
     const [loading, setLoading] = useState(true);
     const [productInf, setProductInf] = useState({})
     const [details, setDetails] = useState([])
+    const [phone, setPhone] = useState(false)
+
+    const tokenIsExpired = () => {
+        if (localStorage.getItem("token") == null) {
+            return false
+        }
+        return true
+    }
 
     useEffect(() => {
         setLoading(true)
@@ -38,6 +46,9 @@ const Details = () => {
         setImages([])
         setProductInf({})
         if (images.length == 0) {
+            if (localStorage.getItem("token") != null) {
+                setPhone(true)
+            }
             setImages(rsDetailsProduct.images)
             setProductInf(rsDetailsProduct)
             var arrDetails = []
@@ -58,7 +69,7 @@ const Details = () => {
                     <Col xs={22} sm={12} md={12} lg={12} xl={10} >
                         <Carousel autoPlay>
                             {images.map((item, index) => (<div key={index} style={{ height: "450px" }}>
-                                <img src={`${process.env.REACT_APP_SHOP}` +`${item}`}  style={{ height: "100%", width: "100%", objectFit: 'contain' }} />
+                                <img src={`${process.env.REACT_APP_SHOP}` + `${item}`} style={{ height: "100%", width: "100%", objectFit: 'contain' }} />
                             </div>))}
                         </Carousel>
                     </Col>
@@ -70,7 +81,7 @@ const Details = () => {
                             <List.Item
                             >
                                 <List.Item.Meta
-                                    avatar={<Avatar src={`${process.env.REACT_APP_SHOP}` +`${productInf.imageShop}`} />}
+                                    avatar={<Avatar src={`${process.env.REACT_APP_SHOP}` + `${productInf.imageShop}`} />}
                                     title={<a href={"/personal-page/" + productInf.shopId}>{productInf.shopNm}</a>}
                                 // description={productInf.descShop}
                                 />
@@ -110,12 +121,15 @@ const Details = () => {
                                     </Row>
                                 </List> */}
 
-
-                                <Row>
+                                {phone ? <Row>
                                     <Col span={9} align="middle" style={{ textAlign: "center", paddingBottom: "10px" }}>
-                                        <Button style={{ width: "200px" }}>09312345*** Bấm Để Hiện</Button>
+                                        <Button style={{ width: "200px" }}>{productInf.phone}</Button>
                                     </Col>
-                                </Row>
+                                </Row> : <Row>
+                                    <Col span={9} align="middle" style={{ textAlign: "center", paddingBottom: "10px" }}>
+                                        <Button style={{ width: "200px" }}>Vui lòng đăng nhập</Button>
+                                    </Col>
+                                </Row>}
                                 <Row>
                                     <Col align="middle" style={{ textAlign: "left", paddingBottom: "10px" }}>
                                         <b>Mô Tả</b> <br />
@@ -149,7 +163,7 @@ const Details = () => {
                                             // style={{ height: 300 }}
                                             hoverable
                                             cover={<img width={272} height={200}
-                                                alt="logo" src={`${process.env.REACT_APP_SHOP}` +`${item.image}`} />}
+                                                alt="logo" src={`${process.env.REACT_APP_SHOP}` + `${item.image}`} />}
                                         >
                                             <Meta className='styleMeta' title={item.name} />
                                             <List.Item.Meta title={<div style={{ color: '#B70404' }}>{String(item.price).replace(

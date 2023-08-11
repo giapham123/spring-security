@@ -16,7 +16,8 @@
         B.shop_id shopId,
         'product-photos/' || B.image imageShop,
         B.desc descShop,
-        B.shop_nm shopNm
+        B.shop_nm shopNm,
+        B.phone phone
         FROM public.products A, public."usersShop" B
         WHERE A.user_lg = B.email
         AND product_id = #{productId}

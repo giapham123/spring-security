@@ -20,6 +20,16 @@ public class ProductModel {
     String imageShop;
     String descShop;
     String shopNm;
+    String phone;
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
+
     boolean isPublish;
 
     public boolean isPublish() {
