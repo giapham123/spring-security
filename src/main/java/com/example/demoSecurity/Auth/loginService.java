@@ -86,4 +86,8 @@ public class loginService {
         return rs;
     }
 
+    public Boolean activeUser(String uuid){
+        loginMapper.activeUser(uuid);
+        return true;
+    }
 }

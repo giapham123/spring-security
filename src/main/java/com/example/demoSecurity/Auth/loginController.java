@@ -4,6 +4,7 @@ import com.example.demoSecurity.Security.AuthenticationRequest;
 import com.example.demoSecurity.Security.AuthenticationResponse;
 import com.example.demoSecurity.Security.JwtTokenService;
 import com.example.demoSecurity.Security.JwtUserDetailsService;
+import com.example.demoSecurity.SendMail.EmailService;
 import com.example.demoSecurity.Shared.ResponseObject;
 import com.example.demoSecurity.apiTest.model.ProductModel;
 import com.example.demoSecurity.apiTest.model.ShopModel;
@@ -26,6 +27,16 @@ public class loginController {
     @Autowired
     loginService loginService;
 
+    @Autowired
+    EmailService emailService;
+
+
+//    @RequestMapping({"/post-page","/details/{id}","/personal/{userId}",
+//            "/personal-page/{userId}","/all-product/{id}"})
+//    public String index(){
+//        return "index";
+//    }
+
     @PostMapping("/authenticate")
     public ResponseEntity<String> authenticate(@RequestBody final AuthenticationRequest authenticationRequest) {
         return loginService.authenticate(authenticationRequest);
@@ -46,6 +57,8 @@ public class loginController {
         try{
             Gson g = new Gson();
             ShopModel s = g.fromJson(data, ShopModel.class);
+            String ursUuid = emailService.confirmEmail(s.getEmail());
+            s.setUsrUuid(ursUuid);
             loginService.insertDataUserShop(images,s);
         }catch (Exception e){
             System.out.println(e);
@@ -53,5 +66,11 @@ public class loginController {
         rsUsr.setSuccess(true);
         rsUsr.setMessage("Insert Success");
         return rsUsr;
+    }
+
+    @GetMapping("/confirm-account")
+    public ResponseEntity<String> confirm(@RequestParam("token")String confirmationToken) {
+        loginService.activeUser(confirmationToken);
+        return ResponseEntity.ok("Tài Khoản Đã Được Kích Hoạt, Vui Lòng Đăng Nhập Lại!");
     }
 }

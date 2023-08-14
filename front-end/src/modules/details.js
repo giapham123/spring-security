@@ -21,12 +21,6 @@ const Details = () => {
     const [details, setDetails] = useState([])
     const [phone, setPhone] = useState(false)
 
-    const tokenIsExpired = () => {
-        if (localStorage.getItem("token") == null) {
-            return false
-        }
-        return true
-    }
 
     useEffect(() => {
         setLoading(true)
@@ -42,9 +36,9 @@ const Details = () => {
     }, [pathname]);
     useEffect(() => {
         setLoading(false)
-        setDetails([])
-        setImages([])
-        setProductInf({})
+        // setDetails([])
+        // setImages([])
+        // setProductInf({})
         if (images.length == 0) {
             if (localStorage.getItem("token") != null) {
                 setPhone(true)

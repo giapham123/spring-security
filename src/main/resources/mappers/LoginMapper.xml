@@ -13,11 +13,15 @@
         pwd,
         usr_nm usrNm
         FROM public."usersShop"
-        WHERE email = #{email}
+        WHERE email = #{email} and active = true
     </select>
     <insert id="insertUserShop">
         INSERT INTO public."usersShop"(
-        image, "desc", shop_nm, email, pwd, usr_nm, addr, phone)
-        VALUES ( #{img}, #{desc}, #{shopNm}, #{email}, #{pwd}, '123', #{addr}, #{phone});
+        image, "desc", shop_nm, email, pwd, usr_nm, addr, phone, user_uuid)
+        VALUES ( #{img}, #{desc}, #{shopNm}, #{email}, #{pwd}, null, #{addr}, #{phone}, #{usrUuid})
+    </insert>
+
+    <insert id="activeUser">
+        UPDATE  public."usersShop" SET active = true Where user_uuid = #{uuid}
     </insert>
 </mapper>

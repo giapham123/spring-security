@@ -12,4 +12,5 @@ public interface LoginMapper {
 
     int insertUserShop(ShopModel shopModel);
 
+    int activeUser(@Param("uuid") String uuid);
 }

@@ -14,6 +14,15 @@ public class ShopModel {
     Integer phone;
     String crtDt;
     List<ProductModel> lsProduct;
+    String usrUuid;
+
+    public String getUsrUuid() {
+        return usrUuid;
+    }
+
+    public void setUsrUuid(String usrUuid) {
+        this.usrUuid = usrUuid;
+    }
 
     public String getEmail() {
         return email;
