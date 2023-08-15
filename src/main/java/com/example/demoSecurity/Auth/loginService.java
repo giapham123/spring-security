@@ -81,6 +81,9 @@ public class loginService {
                     Files.write(path, bytes);
                     //End Save image to folder source
                     loginMapper.insertUserShop(shopModel);
+                    rs.setData(null);
+                    rs.setSuccess(true);
+                    rs.setMessage("Vui lòng kích hoạt tài khoản trong email của bạn.");
                 }
             } catch (Exception e) {
                 if (e instanceof FileAlreadyExistsException) {

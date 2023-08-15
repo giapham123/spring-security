@@ -6,6 +6,7 @@ import Address from './address';
 import { insertUserShop } from '../actions/regis'
 import { useSelector, useDispatch } from 'react-redux'
 import { notificationController } from '../utils/notify'
+import _ from 'lodash'
 const Regis = ({ isShowRegis, setIshowRegis }) => {
     const dispatch = useDispatch()
     const regisData = useSelector(state => state.regis);
@@ -17,8 +18,12 @@ const Regis = ({ isShowRegis, setIshowRegis }) => {
     const { Title } = Typography;
     const { Option } = Select;
     useEffect(() => {
-        if(!regisData.success){
-            notificationController.error(regisData.message)
+        if (!_.isEmpty(regisData)) {
+            if(!regisData.success){
+                notificationController.error(regisData.message)
+            }else{
+                notificationController.success(regisData.message)
+            }
         }
         setLoading(false)
     }, [regisData]);

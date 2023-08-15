@@ -6,6 +6,7 @@ import { login } from '../actions/loginAction'
 import { useSelector, useDispatch } from 'react-redux'
 import Service from '../service';
 import axios from 'axios';
+import _ from 'lodash'
 
 const Login = ({ isShow, setIshow }) => {
     const dispatch = useDispatch()
@@ -24,7 +25,12 @@ const Login = ({ isShow, setIshow }) => {
     }, [loginToken]);
 
     useEffect(() => {
-        setIsShowDialogRegis(false)
+        if (!_.isEmpty(regisData)) {
+            if (regisData.success) {
+                dispatch({ type: 'REGIS_ACC', payload: {} })
+                setIsShowDialogRegis(false)
+            }
+        }
     }, [regisData]);
 
 
@@ -51,14 +57,14 @@ const Login = ({ isShow, setIshow }) => {
         dispatch(login(e))
     }
     return (
-        <div >        
-                <Modal
-                    title="Đăng nhập"
-                    open={isShow}
-                    onCancel={hideLogin}
-                    footer={null}
-                >
-                    <Spin spinning={loading}>
+        <div >
+            <Modal
+                title="Đăng nhập"
+                open={isShow}
+                onCancel={hideLogin}
+                footer={null}
+            >
+                <Spin spinning={loading}>
                     <Form
                         name="regis-form"
                         onFinish={handleLogin}
@@ -89,10 +95,10 @@ const Login = ({ isShow, setIshow }) => {
                         </Form.Item>
 
                     </Form>
-                    </Spin>
-                </Modal>
-                <Regis isShowRegis={isShowDialogRegis} setIshowRegis={onClose} />
-           
+                </Spin>
+            </Modal>
+            <Regis isShowRegis={isShowDialogRegis} setIshowRegis={onClose} />
+
         </div>
     )
 };

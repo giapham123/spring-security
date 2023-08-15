@@ -14,6 +14,7 @@ import regisReducer from '../reducers/regisReducer'
 const persistConfig = {
     key: 'root',
     storage,
+    blacklist:['regis']
     // allProduct:[allProductReducer]
 }
 const rootReducer = combineReducers({
