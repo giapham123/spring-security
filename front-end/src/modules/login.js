@@ -9,6 +9,7 @@ import axios from 'axios';
 
 const Login = ({ isShow, setIshow }) => {
     const dispatch = useDispatch()
+    const regisData = useSelector(state => state.regis);
     const loginToken = useSelector(state => state.login.token);
     const loginFail = useSelector(state => state.login.failToLogin);
     const [loading, setLoading] = useState(false);
@@ -21,6 +22,10 @@ const Login = ({ isShow, setIshow }) => {
         axios.defaults.headers.common['Authorization'] = `Bearer ${loginToken}`;
         Service.setToken(loginToken)
     }, [loginToken]);
+
+    useEffect(() => {
+        setIsShowDialogRegis(false)
+    }, [regisData]);
 
 
     useEffect(() => {
@@ -46,14 +51,14 @@ const Login = ({ isShow, setIshow }) => {
         dispatch(login(e))
     }
     return (
-        <div >
-            <Spin spinning={loading}>
+        <div >        
                 <Modal
                     title="Đăng nhập"
                     open={isShow}
                     onCancel={hideLogin}
                     footer={null}
                 >
+                    <Spin spinning={loading}>
                     <Form
                         name="regis-form"
                         onFinish={handleLogin}
@@ -84,9 +89,10 @@ const Login = ({ isShow, setIshow }) => {
                         </Form.Item>
 
                     </Form>
+                    </Spin>
                 </Modal>
                 <Regis isShowRegis={isShowDialogRegis} setIshowRegis={onClose} />
-            </Spin>
+           
         </div>
     )
 };

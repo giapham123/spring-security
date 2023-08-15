@@ -8,6 +8,7 @@ import detailsReducer from '../reducers/detailsReducer'
 import personalReducer from '../reducers/personalReducer'
 import loginReducer from '../reducers/loginReducer'
 import totalDataReducer from '../reducers/totalDataReducer'
+import regisReducer from '../reducers/regisReducer'
 
 
 const persistConfig = {
@@ -22,7 +23,8 @@ const rootReducer = combineReducers({
     detailsProduct:detailsReducer,
     personal:personalReducer,
     login:loginReducer,
-    totalData: totalDataReducer
+    totalData: totalDataReducer,
+    regis:regisReducer
 })
 
 const persistedReducer = persistReducer(persistConfig, rootReducer)

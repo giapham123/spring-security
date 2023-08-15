@@ -4,7 +4,8 @@ const service = new Service;
 export function insertUserShop(param) {
     return async function insertUserShop(dispatch) {
         const response = await service.post('/save-user-info', param)
-        console.log(response)
+        console.log(response.data)
+        dispatch({ type: 'REGIS_ACC', payload: response.data })
     }
 }
 
