@@ -5,7 +5,7 @@ import '../css/login.css'
 import Address from './address';
 import { insertUserShop } from '../actions/regis'
 import { useSelector, useDispatch } from 'react-redux'
-
+import { notificationController } from '../utils/notify'
 const Regis = ({ isShowRegis, setIshowRegis }) => {
     const dispatch = useDispatch()
     const regisData = useSelector(state => state.regis);
@@ -17,6 +17,9 @@ const Regis = ({ isShowRegis, setIshowRegis }) => {
     const { Title } = Typography;
     const { Option } = Select;
     useEffect(() => {
+        if(!regisData.success){
+            notificationController.error(regisData.message)
+        }
         setLoading(false)
     }, [regisData]);
 

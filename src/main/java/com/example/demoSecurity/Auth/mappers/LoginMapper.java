@@ -13,4 +13,6 @@ public interface LoginMapper {
     int insertUserShop(ShopModel shopModel);
 
     int activeUser(@Param("uuid") String uuid);
+
+    int checkAccountExist(@Param("email") String email);
 }

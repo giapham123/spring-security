@@ -24,4 +24,8 @@
     <insert id="activeUser">
         UPDATE  public."usersShop" SET active = true Where user_uuid = #{uuid}
     </insert>
+
+    <insert id="checkAccountExist">
+        SELECT COUNT(*) FROM public."usersShop" WHERE email = #{email} and active = true
+    </insert>
 </mapper>

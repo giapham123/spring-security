@@ -64,17 +64,24 @@ public class loginService {
     public ResponseObject insertDataUserShop(MultipartFile[] images, ShopModel shopModel){
         ResponseObject rs = new ResponseObject();
             try {
-                String name = images[0].getOriginalFilename();
-                String randomID = UUID.randomUUID().toString();
-                String fileName = randomID.concat(name.substring(name.lastIndexOf(".")));
-                shopModel.setImg(fileName);
-                //Save image to folder source
-                String uploadDir = "./product-photos/";
-                byte[] bytes = images[0].getBytes();
-                Path path = Paths.get(uploadDir + fileName);
-                Files.write(path, bytes);
-                //End Save image to folder source
-
+                int existAccount = loginMapper.checkAccountExist(shopModel.getEmail());
+                if(existAccount != 0){
+                    rs.setData(null);
+                    rs.setSuccess(false);
+                    rs.setMessage("Tài khoản đã tồn tại.");
+                }else {
+                    String name = images[0].getOriginalFilename();
+                    String randomID = UUID.randomUUID().toString();
+                    String fileName = randomID.concat(name.substring(name.lastIndexOf(".")));
+                    shopModel.setImg(fileName);
+                    //Save image to folder source
+                    String uploadDir = "./product-photos/";
+                    byte[] bytes = images[0].getBytes();
+                    Path path = Paths.get(uploadDir + fileName);
+                    Files.write(path, bytes);
+                    //End Save image to folder source
+                    loginMapper.insertUserShop(shopModel);
+                }
             } catch (Exception e) {
                 if (e instanceof FileAlreadyExistsException) {
                     throw new RuntimeException("A file of that name already exists.");
@@ -82,7 +89,7 @@ public class loginService {
                 System.out.println(e);
                 throw new RuntimeException(e.getMessage());
             }
-        loginMapper.insertUserShop(shopModel);
+
         return rs;
     }
 

@@ -59,12 +59,10 @@ public class loginController {
             ShopModel s = g.fromJson(data, ShopModel.class);
             String ursUuid = emailService.confirmEmail(s.getEmail());
             s.setUsrUuid(ursUuid);
-            loginService.insertDataUserShop(images,s);
+            rsUsr = loginService.insertDataUserShop(images,s);
         }catch (Exception e){
             System.out.println(e);
         }
-        rsUsr.setSuccess(true);
-        rsUsr.setMessage("Insert Success");
         return rsUsr;
     }
 
