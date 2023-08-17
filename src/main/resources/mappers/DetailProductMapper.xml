@@ -20,7 +20,7 @@
         B.phone phone
         FROM public.products A, public."usersShop" B
         WHERE A.user_lg = B.email
-        AND product_id = #{productId}
+        AND a.product_id = #{productId}
     </select>
     <select id="getLsImages" resultType="String">
         SELECT
