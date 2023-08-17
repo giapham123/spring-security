@@ -7,8 +7,10 @@ import { Spin, Card, Row, Col, Button, Space, InputNumber, message, Form, Input,
 import Address from './address';
 import { insertProduct } from '../actions/postPageActions'
 import { notificationController } from '../utils/notify'
+import { useLocation } from 'react-router'
 function PostPage() {
     const dispatch = useDispatch()
+    const location = useLocation()
     const rsCate = useSelector(state => state.cate.allCate.data);
     const postPage = useSelector(state => state.postPage);
     const [isShowDialogAddress, setIsShowDialogAddress] = useState(false)
@@ -58,6 +60,9 @@ function PostPage() {
         }
         setLoading(false)
     }, [postPage]);
+    useEffect(() => {
+    //    window.location.reload()
+      }, [location.key])
     const submitDataEvent = (value) => {
         setLoading(true)
         if(fileList == undefined){

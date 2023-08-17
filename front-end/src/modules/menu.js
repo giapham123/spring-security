@@ -201,19 +201,19 @@ function MenuBarComp() {
         />
       </Col>
       <Routes>
-        <Route exact path='/' element={< Home />}></Route>
-        <Route exact path='/details/:id' element={< Details />}></Route>
-        <Route exact path='/personal-page/:userId' element={< PersonalPage />}></Route>
-        <Route exact path='/post-page' element={< PostPage />}></Route>
-        <Route exact path='/all-product/gd_nt_cc' element={< AllProduct />}></Route>
-        <Route exact path='/all-product/dt' element={< AllProduct />}></Route>
-        <Route exact path='/all-product/da_tp_oth' element={< AllProduct />}></Route>
-        <Route exact path='/all-product/me_be' element={< AllProduct />}></Route>
-        <Route exact path='/all-product/tt_dcn' element={< AllProduct />}></Route>
-        <Route exact path='/all-product/gt_tt' element={< AllProduct />}></Route>
-        <Route exact path='/all-product/vp_cnn' element={< AllProduct />}></Route>
-        <Route exact path='/all-product/tl_ml_mg' element={< AllProduct />}></Route>
-        <Route exact path='/personal/:userId' element={< EditPersonalPage />}></Route>
+        <Route exact forceRefresh={true} path='/' element={< Home />}></Route>
+        <Route exact forceRefresh={true} path='/details/:id' element={< Details />}></Route>
+        <Route exact forceRefresh={true} path='/personal-page/:userId' element={< PersonalPage />}></Route>
+        <Route exact forceRefresh={true} path='/post-page' element={< PostPage />}></Route>
+        <Route exact forceRefresh={true} path='/all-product/gd_nt_cc' element={< AllProduct />}></Route>
+        <Route exact forceRefresh={true} path='/all-product/dt' element={< AllProduct />}></Route>
+        <Route exact forceRefresh={true} path='/all-product/da_tp_oth' element={< AllProduct />}></Route>
+        <Route exact forceRefresh={true} path='/all-product/me_be' element={< AllProduct />}></Route>
+        <Route exact forceRefresh={true} path='/all-product/tt_dcn' element={< AllProduct />}></Route>
+        <Route exact forceRefresh={true} path='/all-product/gt_tt' element={< AllProduct />}></Route>
+        <Route exact forceRefresh={true} path='/all-product/vp_cnn' element={< AllProduct />}></Route>
+        <Route exact forceRefresh={true} path='/all-product/tl_ml_mg' element={< AllProduct />}></Route>
+        <Route exact forceRefresh={true} path='/personal/:userId' element={< EditPersonalPage />}></Route>
       </Routes>
     </>
   );
