@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Dimensions } from 'react-native';
 import '../css/homeStyle.css'
-import { Card, Button, List, Skeleton } from 'antd';
+import { Card, Button, List, Skeleton, Pagination, Row, Col } from 'antd';
 import { Link } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux'
 import { showAllProductViaCategory, getTotalData } from '../actions/showAllProducts'
@@ -10,6 +10,7 @@ import 'moment/locale/vi'
 var count = 1;
 function AllProduct() {
     const dispatch = useDispatch()
+    const [current, setCurrent] = useState(1);
     const { pathname } = window.location
     const { Meta } = Card;
     const [initLoading, setInitLoading] = useState(true);
@@ -101,28 +102,68 @@ function AllProduct() {
                 ),
                 )));
 
+            // setTimeout(() => {
+            //     setList(
+            //         list.concat(rsProduct),
+            //     );
+            //     window.dispatchEvent(new Event('resize'));
+            //     setLoading(false);
+            // }, 1000);
+        }
+    };
+    const onChange = (page) => {
+        setCurrent(page);
+        var param = {
+            path: pathname.split('/')[2],
+            page: page -1,
+            userId: 0,
+            edit: 1
+        }
+        dispatch(showAllProductViaCategory(param))
+        // if (count == 1) {
+            setLoading(true);
+            setList(
+                list.concat([...new Array(3)].map(() => ({
+                    productId: null,
+                    name: null,
+                    price: null,
+                    desc: null,
+                    addr: null,
+                    details: null,
+                    cateId: null,
+                    creDt: null,
+                    updDt: null,
+                    userId: null,
+                    images: null,
+                    image: null,
+                    loading: true
+                }
+                ),
+                )));
+
             setTimeout(() => {
-                setList(
-                    list.concat(rsProduct),
-                );
+                console.log(rsProduct)
+                // setList(
+                //     rsProduct
+                // );
                 window.dispatchEvent(new Event('resize'));
                 setLoading(false);
             }, 1000);
-        }
-    };
-    const loadMore = list.length >= rsTotalData ? null :
-        list.length != 0 && !initLoading && !loading ? (
-            <div
-                style={{
-                    textAlign: 'center',
-                    marginTop: 12,
-                    height: 32,
-                    lineHeight: '32px',
-                }}
-            >
-                <Button onClick={onLoadMore}>loading more</Button>
-            </div>
-        ) : null;
+        // }
+      };
+    // const loadMore = list.length >= rsTotalData ? null :
+    //     list.length != 0 && !initLoading && !loading ? (
+    //         <div
+    //             style={{
+    //                 textAlign: 'center',
+    //                 marginTop: 12,
+    //                 height: 32,
+    //                 lineHeight: '32px',
+    //             }}
+    //         >
+    //             <Button onClick={onLoadMore}>loading more</Button>
+    //         </div>
+    //     ) : null;
 
 
     return (
@@ -142,7 +183,7 @@ function AllProduct() {
                         className="demo-loadmore-list"
                         loading={initLoading}
                         itemLayout="horizontal"
-                        loadMore={loadMore}
+                        // loadMore={loadMore}
                         dataSource={list}
                         renderItem={(item, index) => (
                             <Link to={{
@@ -154,7 +195,7 @@ function AllProduct() {
                                             // style={{ height: 300 }}
                                             hoverable
                                             cover={<img width={272} height={200}
-                                                alt="logo" src={`${process.env.REACT_APP_SHOP}` +`${item.image}`} />}
+                                                alt="logo" src={`${process.env.REACT_APP_SHOP}` + `${item.image}`} />}
                                         >
                                             <Meta className='styleMeta' title={item.name} />
                                             <List.Item.Meta title={<div style={{ color: '#B70404' }}>{String(item.price).replace(
@@ -167,7 +208,20 @@ function AllProduct() {
                             </Link>
                         )}
                     />
+                    <Row style={{
+                        justifyContent: "center"
+                    }}>
+                        <Col style={{
+                            display: "flex",
+                            alignItems: "center",
+                            justifyContent: "center",
+                            flex: 1
+                        }}>
+                            <Pagination current={current}  onChange={onChange} total={rsTotalData} />
+                        </Col>
+                    </Row>
                 </Card>
+
             </div>
         </>
     )
