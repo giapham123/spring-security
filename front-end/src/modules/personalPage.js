@@ -1,6 +1,6 @@
 import { Dimensions } from 'react-native';
 import '../css/homeStyle.css'
-import { Card, List, Row, Col, Button, Skeleton, Avatar } from 'antd';
+import { Card, List, Row, Col, Button, Skeleton, Avatar, Pagination} from 'antd';
 import { home1 } from '../lsData/homeData'
 import { Link } from 'react-router-dom';
 import React, { useEffect, useState } from 'react';
@@ -14,6 +14,7 @@ var count = 1;
 function PersonalPage() {
     const { Meta } = Card;
     const dispatch = useDispatch()
+    const [current, setCurrent] = useState(1);
     const { pathname } = window.location
     const [initLoading, setInitLoading] = useState(true);
     const [loading, setLoading] = useState(false);
@@ -115,13 +116,56 @@ function PersonalPage() {
 
             setTimeout(() => {
                 setList(
-                    list.concat(rsPersonalProduct)
+                    // list.concat(rsPersonalProduct)
                 );
                 window.dispatchEvent(new Event('resize'));
                 setLoading(false);
             }, 1000);
         }
     };
+    useEffect(() => {
+        setList(rsPersonalProduct);
+    }, [rsPersonalProduct]);
+    const onChange = (page) => {
+        setCurrent(page);
+        var param = {
+            path: pathname.split('/')[2],
+            page: page -1,
+            userId: 0,
+            edit: 1
+        }
+        dispatch(getPersonalProductPage(param))
+        // if (count == 1) {
+            setLoading(true);
+            setList(
+                list.concat([...new Array(3)].map(() => ({
+                    productId: null,
+                    name: null,
+                    price: null,
+                    desc: null,
+                    addr: null,
+                    details: null,
+                    cateId: null,
+                    creDt: null,
+                    updDt: null,
+                    userId: null,
+                    images: null,
+                    image: null,
+                    loading: true
+                }
+                ),
+                )));
+
+            setTimeout(() => {
+                // console.log(rsProduct)
+                // setList(
+                //     rsProduct
+                // );
+                window.dispatchEvent(new Event('resize'));
+                setLoading(false);
+            }, 1000);
+        // }
+      };
     const loadMore = list.length >= rsTotalData ? null :
         list.length != 0 && !initLoading && !loading ? (
             <div
@@ -196,7 +240,7 @@ function PersonalPage() {
                                 className="demo-loadmore-list"
                                 loading={initLoading}
                                 itemLayout="horizontal"
-                                loadMore={loadMore}
+                                // loadMore={loadMore}
                                 dataSource={list}
                                 renderItem={(item, index) => (
                                     <Link to={{
@@ -221,6 +265,18 @@ function PersonalPage() {
                                     </Link>
                                 )}
                             />
+                            <Row style={{
+                        justifyContent: "center"
+                    }}>
+                        <Col style={{
+                            display: "flex",
+                            alignItems: "center",
+                            justifyContent: "center",
+                            flex: 1
+                        }}>
+                            <Pagination current={current}  onChange={onChange} total={rsTotalData} />
+                        </Col>
+                    </Row>
                         </Card>
                     </Col>
                 </Row>
